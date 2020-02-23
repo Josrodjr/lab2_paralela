@@ -55,16 +55,23 @@ int main(int argc, char* argv[]) {
  * Return val:    number_in_circle
  */
 
-long long int Count_hits(long long int number_of_tosses, int thread_count) {
+int randInRange(int min, int max)
+{
+  return min + (int) (rand() / (double) (RAND_MAX + 1) * (max - min + 1));
+}
 
-   ** TODO **
+float newrandom(){
+  return -1+2*((float)rand())/RAND_MAX;
+}
+
+long long int Count_hits(long long int number_of_tosses, int thread_count) {
   
    long long int hits = 0;
    float x, y, h;
    #pragma omp parallel for num_threads(thread_count) reduction(+: hits)
    for(int i = 0; i < number_of_tosses; i++) {
-	   x = randomaqui.exe;
-	   y = randomaqui.exe;
+	   x = newrandom();
+	   y = newrandom();
 	   h = sqrt( pow(x, 2) + pow(y, 2));
 	   if (h <= 1) {
 		   hits++;
