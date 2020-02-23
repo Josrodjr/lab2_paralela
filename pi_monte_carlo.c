@@ -19,6 +19,8 @@
 #include <stdlib.h>
 #include <omp.h>
 #include "my_rand.h"
+#include <math.h>
+#include <stdbool.h>
 
 /* Serial function */
 void Get_args(char* argv[], int* thread_count_p, 
@@ -56,6 +58,18 @@ int main(int argc, char* argv[]) {
 long long int Count_hits(long long int number_of_tosses, int thread_count) {
 
    ** TODO **
+  
+   long long int hits = 0;
+   float x, y, h;
+   #pragma omp parallel for num_threads(thread_count) reduction(+: hits)
+   for(int i = 0; i < number_of_tosses; i++) {
+	   x = randomaqui.exe;
+	   y = randomaqui.exe;
+	   h = sqrt( pow(x, 2) + pow(y, 2));
+	   if (h <= 1) {
+		   hits++;
+	   }
+   }
   
 }  /* Count_hits */
 
