@@ -27,17 +27,22 @@ void Usage(char* prog_name);
 int main(int argc, char* argv[]) {
    long long n, k;
    int thread_count;
-   double factor = 1.0;
+   double factor = 0.0;
    double sum = 0.0;
 
    thread_count = strtol(argv[1], NULL, 10);
    n = strtoll(argv[2], NULL, 10);
 
-#  pragma omp parallel for num_threads(thread_count) \
+#  pragma omp parallel for num_threads(thread_count) private(factor) \
       reduction(+: sum)
    for (k = 0; k < n; k++) { 
+      if (k%2 == 0){
+         factor = 1;
+      } else {
+         factor = -1;
+      }
       sum += factor/(2*k+1);
-	  factor = -factor;
+
    }
 
    sum = 4.0*sum;
